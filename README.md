@@ -30,7 +30,7 @@ The code in this repo allows training TimeLlaMA models on ExpTime and evaluating
 ## Knowledge Graph-Instructed Generation (GIG) Strategy
 
 <p align="center">
-    <img src="https://github.com/chenhan97/TimeLlama/pics/gig.jpg" width="400"/>
+    <img src="https://github.com/chenhan97/TimeLlama/pics/gig.png" width="400"/>
 <p>
 Recent work has shown promise in using large language models (LLMs) like ChatGPT to automatically generate datasets by prompting the model to produce answers. However, directly prompting LLMs to generate temporal reasoning explanations results in low-quality and incoherent outputs.
 
