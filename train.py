@@ -19,7 +19,8 @@ import warnings
 
 IGNORE_TOKEN_ID = LabelSmoother.ignore_index
 
-access_token = "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"
+#add your own token here
+access_token = ""
 
 @dataclass
 class ModelArguments:
