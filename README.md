@@ -1,14 +1,18 @@
 <br><br>
 
 <p align="center">
-    <img src="" width="700"/>
+    <img src="https://i.postimg.cc/cJN7LKY0/logo.png" width="500"/>
 <p>
 <br>
 
 <p align="center">
-        🤗 <a href="https://huggingface.co/chrisyuan45/TimeLlama-7b-chat">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/">Paper</a>
+        🤗 <a href="https://huggingface.co/chrisyuan45/TimeLlama-7b-chat">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/2310.01074">Paper</a>
 <br>
-  
+
+| Models              | TimeLlama-7b | ChatTimeLlama-7b | TimeLlama-13b | ChatTimeLlama-13b |   
+|---------------------|:------------:|:----------------:|:-------------:|------------------:|
+| Huggingface Repo    |<a href="https://huggingface.co/chrisyuan45/TimeLlama-7b">🤗</a>|<a href="https://huggingface.co/chrisyuan45/TimeLlama-7b-chat">🤗</a>|<a href="https://huggingface.co/chrisyuan45/TimeLlama-13b">🤗</a>|<a href="https://huggingface.co/chrisyuan45/TimeLlama-13b-chat">🤗</a>|  
+
 ## News and Updates
 
 * 2023.9.30 🔥 The TimeLlama series models are available on huggingface. 
@@ -73,14 +77,38 @@ However, if you prefer no coding, we also prepare a chat script for you (of cour
 python ChatwithModel.py --model_name chrisyuan45/TimeLlama-7b-chat
 ```
 
-## finetune
+## Finetune
 
+We provide our finetuning code in "train.py". To run the finetuning code, you need to have access to meta-llama models. Click here to submit the request form [Llama2 Access](https://ai.meta.com/resources/models-and-libraries/llama-downloads/). Then, please generate your own access token on huggingface and replace line 23 in train.py accordingly.
 
+To run the finetuning code on multi-GPUs, please consider adopting the following script:
+```
+#!/bin/bash
+
+torchrun --nproc_per_node 8 --master_port 14545 train.py\
+    --data_path dataset/train_dataset.json \
+    --output_dir model13chat \
+    --num_train_epochs 70 \
+    --per_device_train_batch_size 1 \
+    --per_device_eval_batch_size 1 \
+    --tf32 True \
+    --bf16 True \
+    --gradient_accumulation_steps 4 \
+    --weight_decay 0.01 \
+    --warmup_ratio 0.05 \
+    --lr_scheduler_type "cosine" \
+    --logging_steps 1 \
+    --gradient_checkpointing True \
+    --disable_tqdm False \
+    --learning_rate 5e-5  \
+    --fsdp "full_shard offload auto_wrap" \
+    --fsdp_transformer_layer_cls_to_wrap 'LlamaDecoderLayer' \
+```
 ## Performance
 
 We evaluate the most popular LLMs on our golden human-annotated ExpTime evaluation dataset besides the TimeLlama series. The prediction is evaluated by the F1 score and explanation correctness is evaluated via BLEU, ROURGE, and BertScore. We also included human evaluation results in our paper. The brief evaluation results are shown here: 
 
-| Models              | Pos F1 | Neu F1 | Neg F1 | Overall F1 | BLEU | ROUGE | BertScore |
+| Models              | Pos F1 | Neg F1 | Neu F1 | Overall F1 | BLEU | ROUGE | BertScore |
 |---------------------|:------:|:------:|:------:|:----------:|:----:|:-----:|:---------:|
 | Flan T5             | 39.9   |  40.5  | 31.5   |   38.0     | 15.2 | 26.0  | 76.9      |
 | BART                | 34.9   |  16.2  | 19.8   |   25.3     | 8.9  | 19.7  | 74.9      |
@@ -90,7 +118,7 @@ We evaluate the most popular LLMs on our golden human-annotated ExpTime evaluati
 | ChatGPT             | 54.7   |  30.5  | 39.8   |   43.5     | 31.1 | 37.1  | 83.7      |
 | Llama2-7B-chat      | 62.7   |  19.8  | 22.0   |   39.1     | 26.8 | 38.4  | 83.8      |
 | Llama2-13B-chat     | 52.5   |  31.5  | 31.8   |   40.7     | 25.5 | 36.6  | 83.4      |
-| TimeLlama2-7B       | ....   |  ....  | ....   |   ....     | .... | ....  | ....      |
-| TimeLlama2-13B      | ....   |  ....  | ....   |   ....     | .... | ....  | ....      |
+| TimeLlama2-7B       | 93.7   |  75.3  | 70.5   |   81.5     | 59.9 | 56.5  | 90.2      |
+| TimeLlama2-13B      | 97.2   |  81.7  | 77.5   |   87.3     | 44.6 | 54.9  | 89.4      |
 | TimeLlama2-7B-chat  | 95.2   |  76.1  | 71.2   |   83.1     | 61.9 | 57.7  | 90.4      |
-| TimeLlama2-13B-chat | ....   |  ....  | ....   |   ....     | .... | ....  | ....      |
+| TimeLlama2-13B-chat | 97.9   |  83.4  | 78.5   |   88.4     | 46.3 | 56.3  | 89.7      |
