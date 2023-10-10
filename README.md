@@ -122,3 +122,18 @@ We evaluate the most popular LLMs on our golden human-annotated ExpTime evaluati
 | TimeLlama2-13B      | 97.2   |  81.7  | 77.5   |   87.3     | 44.6 | 54.9  | 89.4      |
 | TimeLlama2-7B-chat  | 95.2   |  76.1  | 71.2   |   83.1     | 61.9 | 57.7  | 90.4      |
 | TimeLlama2-13B-chat | 97.9   |  83.4  | 78.5   |   88.4     | 46.3 | 56.3  | 89.7      |
+
+## Citation
+
+Consider citing our paper if you find the repo useful ;)
+
+```
+@misc{yuan2023future,
+      title={Back to the Future: Towards Explainable Temporal Reasoning with Large Language Models}, 
+      author={Chenhan Yuan and Qianqian Xie and Jimin Huang and Sophia Ananiadou},
+      year={2023},
+      eprint={2310.01074},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
