@@ -128,12 +128,10 @@ We evaluate the most popular LLMs on our golden human-annotated ExpTime evaluati
 Consider citing our paper if you find the repo useful ;)
 
 ```
-@misc{yuan2023future,
-      title={Back to the Future: Towards Explainable Temporal Reasoning with Large Language Models}, 
-      author={Chenhan Yuan and Qianqian Xie and Jimin Huang and Sophia Ananiadou},
-      year={2023},
-      eprint={2310.01074},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+@article{yuan2023back,
+  title={Back to the Future: Towards Explainable Temporal Reasoning with Large Language Models},
+  author={Yuan, Chenhan and Xie, Qianqian and Huang, Jimin and Ananiadou, Sophia},
+  journal={arXiv preprint arXiv:2310.01074},
+  year={2023}
 }
 ```
